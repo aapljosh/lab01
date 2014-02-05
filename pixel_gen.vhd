@@ -54,11 +54,11 @@ begin
 				    r <= (others => '1');
 	             g <= (others => '0');
 	             b <= (others => '0');
-				elsif (column <= 2*640/3 and column > 640/3 and row <= 2*640/3) then
+				elsif (column <= 2*640/3 and column > 640/3 and row <= 2*480/3) then
 				    r <= (others => '0');
 	             g <= (others => '1');
 	             b <= (others => '0');
-				elsif (column <= 640 and column > 2*640/3 and row <= 2*640/3) then
+				elsif (column <= 640 and column > 2*640/3 and row <= 2*480/3) then
 				    r <= (others => '0');
 	             g <= (others => '0');
 	             b <= (others => '1');
