@@ -36,7 +36,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity pixel_gen is
     port ( row      : in unsigned(10 downto 0);
            column   : in unsigned(10 downto 0);
-           blank    : in std_logic;
+           blank,sw0,sw1,sw2    : in std_logic;
            r        : out std_logic_vector(7 downto 0);
            g        : out std_logic_vector(7 downto 0);
            b        : out std_logic_vector(7 downto 0));
@@ -50,23 +50,79 @@ begin
     begin
         if blank='0' then
 		      --test pattern
-			   if (column <= 640/3 and row <= 2*640/3) then
-				    r <= (others => '1');
-	             g <= (others => '0');
-	             b <= (others => '0');
-				elsif (column <= 2*640/3 and column > 640/3 and row <= 2*480/3) then
-				    r <= (others => '0');
-	             g <= (others => '1');
-	             b <= (others => '0');
-				elsif (column <= 640 and column > 2*640/3 and row <= 2*480/3) then
-				    r <= (others => '0');
-	             g <= (others => '0');
-	             b <= (others => '1');
-				else
-				    r <= (others => '1');
-	             g <= (others => '1');
-	             b <= (others => '0');
-				end if;
+				if sw0 = '0' and sw1 = '0' then
+						if (column <= 640/3 and row <= 2*480/3) then
+							 r <= (others => '1');
+							 g <= (others => '0');
+							 b <= (others => '0');
+						elsif (column <= 2*640/3 and column > 640/3 and row <= 2*480/3) then
+							 r <= (others => '0');
+							 g <= (others => '1');
+							 b <= (others => '0');
+						elsif (column <= 640 and column > 2*640/3 and row <= 2*480/3) then
+							 r <= (others => '0');
+							 g <= (others => '0');
+							 b <= (others => '1');
+						else
+							 r <= (others => '1');
+							 g <= (others => '1');
+							 b <= (others => '0');
+						end if;
+				 elsif sw0 = '1' and sw1 = '0' then
+				      if (column <= 640/3 and row <= 2*480/3) then
+							 r <= (others => '0');
+							 g <= (others => '0');
+							 b <= (others => '1');
+						elsif (column <= 2*640/3 and column > 640/3 and row <= 2*480/3) then
+							 r <= (others => '0');
+							 g <= (others => '1');
+							 b <= (others => '1');
+						elsif (column <= 640 and column > 2*640/3 and row <= 2*480/3) then
+							 r <= (others => '1');
+							 g <= (others => '0');
+							 b <= (others => '1');
+						else
+							 r <= (others => '0');
+							 g <= (others => '1');
+							 b <= (others => '1');
+						end if;
+				 elsif sw0 = '0' and sw1 = '1' then
+				      if (column <= 640/3 and row <= 2*480/3) then
+							 r <= (others => '1');
+							 g <= (others => '0');
+							 b <= (others => '1');
+						elsif (column <= 2*640/3 and column > 640/3 and row <= 2*480/3) then
+							 r <= (others => '0');
+							 g <= (others => '1');
+							 b <= (others => '1');
+						elsif (column <= 640 and column > 2*640/3 and row <= 2*480/3) then
+							 r <= (others => '1');
+							 g <= (others => '1');
+							 b <= (others => '1');
+						else
+							 r <= (others => '1');
+							 g <= (others => '0');
+							 b <= (others => '1');
+						end if;
+				 elsif sw0 = '1' and sw1 = '1' then
+				      if (column <= 640/3 and row <= 2*480/3) then
+							 r <= (others => '1');
+							 g <= (others => '0');
+							 b <= (others => '1');
+						elsif (column <= 2*640/3 and column > 640/3 and row <= 2*480/3) then
+							 r <= (others => '1');
+							 g <= (others => '0');
+							 b <= (others => '0');
+						elsif (column <= 640 and column > 2*640/3 and row <= 2*480/3) then
+							 r <= (others => '1');
+							 g <= (others => '1');
+							 b <= (others => '1');
+						else
+							 r <= (others => '0');
+							 g <= (others => '0');
+							 b <= (others => '0');
+						end if;
+				 end if;
 		  else
 		      r <= (others => '0');
 	         g <= (others => '0');
