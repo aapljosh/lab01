@@ -108,7 +108,7 @@ begin
 --	 begin     
 --		  if (h_completed = '1') then
 --    	      count_next <= count_reg + 1;
---        elsif (state_reg = state_next) then
+--      elsif (state_reg = state_next) then
 --		      count_next <= count_next;	         
 --		  else
 --		      count_next <= (others => '0');

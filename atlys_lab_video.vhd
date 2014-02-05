@@ -27,10 +27,11 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity atlys_lab_video is
     port ( 
-             clk   : in  std_logic; -- 100 MHz
-             reset : in  std_logic;
-             tmds  : out std_logic_vector(3 downto 0);
-             tmdsb : out std_logic_vector(3 downto 0)
+             clk     : in  std_logic; -- 100 MHz
+             reset   : in  std_logic;
+				 gpio0_io: in  std_logic_vector(15 downto 0);
+             tmds    : out std_logic_vector(3 downto 0);
+             tmdsb   : out std_logic_vector(3 downto 0)
          );
 end atlys_lab_video;
 
@@ -57,7 +58,7 @@ architecture nielsen of atlys_lab_video is
 	 component pixel_gen
 		  port ( row      : in unsigned(10 downto 0);
 			 	   column   : in unsigned(10 downto 0);
-			 	   blank    : in std_logic;
+			 	   blank,sw0,sw1,sw2    : in std_logic;
 			 	   r        : out std_logic_vector(7 downto 0);
 				   g        : out std_logic_vector(7 downto 0);
 				   b        : out std_logic_vector(7 downto 0)
@@ -111,6 +112,9 @@ begin
 	            row => row,
 			 	   column => column,
 			 	   blank => blank,
+					sw0 => gpio0_io(8),
+					sw1 => gpio0_io(9),
+					sw2 => gpio0_io(10),
 			 	   r => red,
 				   g => green,
 				   b => blue
