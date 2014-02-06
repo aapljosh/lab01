@@ -36,7 +36,7 @@ The next state logic is based upon the current count_reg value and the current s
             state_next <= sync_pulse;
           end if;
         when sync_pulse =>
-				      if (count_reg = v_sync_pulse_pulse-1) then
+          if (count_reg = v_sync_pulse_pulse-1) then
             state_next <= back_porch;
           end if;
         when back_porch =>
